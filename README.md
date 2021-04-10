@@ -19,3 +19,5 @@ Korjattavaa seuraavaa palautusta varten:
 * Ulkoasun muokkaus siedettäväksi
 * Toimintojen jaottelu kansioihin ja refraktointi
 * Vikakoodin näyttäminen, jos käyttäjä tekee jotain tyhmää
+
+[Heroku](http://moodle-lite.herokuapp.com/) -Ei toimi toistaiseksi jostain syystä
