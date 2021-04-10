@@ -1,0 +1,58 @@
+{% if session.username %}
+{% if session.role == 'teacher' %}
+
+
+<h1>{{ course_name }}</h1>
+<br>
+<a href="/students/{{ course_id }}">Oppilaat</a>
+<hr>
+<br>
+
+{% for task in tasks %}
+<a href="/tasks/{{ task[0] }}">{{ task[1] }}</a>
+<a href="/remove_task/{{ task[0] }}">Poista</a>
+<hr>
+{% endfor %}
+
+<br>
+<a href="/add_task/{{ course_id }}">Lisää tehtävä</a>
+<hr>
+
+<br>
+{% for cont in content %}
+<p>{{ cont[1] }}</p>
+<a href="/remove_content/{{ cont[0] }}">Poista</a>
+{% endfor %}
+<hr>
+
+<br>
+<a href="/courses/{{ course_name }}/{{ course_id }}/add_text">Lisää materiaalia</a>
+<hr>
+
+<br>
+<a href="/courses/{{ course_name }}/{{ course_id }}/delete_course">Poista kurssi</a>
+
+{% endif %}
+
+
+{% if session.role == 'student' %}
+
+<h1>{{ course_name }}</h1>
+<br>
+<hr>
+<p>Tehtäviä ratkaistu {{ count }}/{{ task_count }}</p>
+
+{% for task in tasks %}
+<a href="/tasks/{{ task[0] }}">{{ task[1] }}</a>
+<hr>
+{% endfor %}
+<hr>
+
+{% for cont in content %}
+<p>{{ cont[1] }}</p>
+{% endfor %}
+
+<hr>
+{% endif %}
+
+{% endif %}

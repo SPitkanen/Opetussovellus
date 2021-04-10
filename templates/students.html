@@ -1,0 +1,11 @@
+{% if session.role == 'teacher' %}
+
+<h1>Oppilaat</h1>
+
+{% for student in students %}
+<p>{{ student[0] }} <a href="/students/tasks/{{ student[1] }}">Tehdyt tehtävät</a></p>
+{% endfor %}
+
+<a href="/courses/{{ course_name }}/{{ course_id }}">Takaisin</a>
+
+{% endif %}

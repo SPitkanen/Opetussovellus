@@ -1,0 +1,50 @@
+{% if session.role == 'teacher' %}
+
+
+<form action="/create_task/{{ course_id }}" method="POST">
+
+<p>Nimi:<br>
+<input type="text" name="name"></p>
+
+<p>Kuvaus:<br>
+<input type="message" name="description"></p>
+
+<p>Vastaus 1:
+<input type="text" name="choice">
+<input type="checkbox" name="boolean" value="0"></p>
+
+<p>Vastaus 2:
+<input type="text" name="choice">
+<input type="checkbox" name="boolean" value="1"></p>
+
+<p>Vastaus 3:
+<input type="text" name="choice">
+<input type="checkbox" name="boolean" value="2"></p>
+
+<p>Vastaus 4:
+<input type="text" name="choice">
+<input type="checkbox" name="boolean" value="3"></p>
+<input type="hidden" name="hide" value="1">
+<input type="submit" name="Submit">
+<input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
+
+</form>
+<hr>
+
+<form action="/create_task/{{ course_id }}" method="POST">
+
+<p>Nimi:<br>
+<input type="text" name="name"></p>
+
+<p>Kuvaus:<br>
+<input type="message" name="description"></p>
+
+<p>Vastaus:<br>
+<input type="message" name="choice"></p>
+<input type="hidden" name="hide" value="2">
+<input type="submit" name="Submit">
+<input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
+
+</form>
+
+{% endif %}

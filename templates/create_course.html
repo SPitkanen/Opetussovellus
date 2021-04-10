@@ -1,0 +1,12 @@
+{% if session.role == 'teacher' %}
+
+<form action="/add_course" method="POST">
+
+<p>Kurssin nimi:<br>
+<input type="text" name="name"></p>
+<input type="submit" name="Luo kurssi">
+<input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
+
+</form>
+
+{% endif %}

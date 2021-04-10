@@ -1,0 +1,13 @@
+{% if session.role == 'teacher' %}
+
+<form action="/insert_text/{{ course_id }}" method="POST">
+
+<p>Lisää tekstiä:<br>
+<textarea name="content" rows="5" cols="40"></textarea>
+<hr>
+<input type="submit" name="Lisää">
+<input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
+
+</form>
+
+{% endif %}

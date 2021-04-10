@@ -1,0 +1,68 @@
+{% if session.role == 'student' %}
+
+<h1>{{ task[0] }}</h1>
+<p>{{ task[1] }}</p>
+<hr>
+
+{% if task[2] == 1 %}
+
+
+<form action="/answer/{{ task_id }}" method="POST">
+
+{% for content in contents%}
+<input type="checkbox" name="answer" value="{{ content[0] }}"> {{ content[1] }} <br>
+{% endfor %}
+
+<input type="hidden" name="hide" value="1">
+<input type="submit" name="Submit">
+<input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
+
+</form>
+
+
+{% endif %}
+
+{% if task[2] == 2 %}
+
+
+<h1>{{ task[0] }}</h1>
+<p>{{ task[1] }}</p>
+
+<form action="/answer/{{ task_id }}" method="POST">
+<input type="message" name="answer">
+<input type="hidden" name="hide" value="2">
+<input type="submit" name="Submit">
+<input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
+</form>
+
+{% endif %}
+
+{% endif %}
+
+
+{% if session.role == 'teacher' %}
+
+<h1>{{ task[0] }}</h1>
+<p>{{ task[1] }}</p>
+<hr>
+
+{% if task[2] == 1 %}
+
+{% for content in contents%}
+<input type="checkbox" name="answer" value="{{ content[0] }}"> {{ content[1] }} <br>
+{% endfor %}
+
+<input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
+</form>
+
+{% endif %}
+
+{% if task[2] == 2 %}
+<h1>{{ task[0] }}</h1>
+<p>{{ task[1] }}</p>
+<input type="message" name="answer">
+<input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
+</form>
+
+{% endif %}
+{% endif %}

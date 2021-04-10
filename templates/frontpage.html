@@ -1,0 +1,29 @@
+{% if session.role == 'student' %}
+
+<a href="/logout">Kirjaudu ulos</a>
+
+<h1>Kurssit</h1><br>
+
+{% for course in courses %}
+<a href="/courses/{{ course[1] }}/{{ course[0] }}">{{ course[1] }}</a>
+<a href="/join/{{ course[0] }}">Liity kurssille</a>
+<hr>
+{% endfor %}
+
+{% endif %}
+
+
+{% if session.role == 'teacher' %}
+
+<a href="/logout">Kirjaudu ulos</a>
+<h1>Kurssit</h1><br>
+
+{% for course in courses %}
+<a href="/courses/{{ course[1] }}/{{ course[0] }}">{{ course[1] }}</a>
+<hr>
+{% endfor %}
+
+<br>
+<a href="/create_course">Luo uusi kurssi</a>
+
+{% endif %}
