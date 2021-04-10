@@ -68,17 +68,17 @@ def frontpage():
 
 @app.route("/create", methods=["POST"])
 def create():
-    if session["csrf_token"] != request.form["csrf_token"]:
-        abort(403)
     username = request.form["username"]
     password = request.form["password"]
     hash_value = generate_password_hash(password)
     sql = "SELECT name FROM users WHERE name=:username"
     result = db.session.execute(sql, {"username":username})
     users = result.fetchall()
-    if users == None:
+    breakpoint()
+    if users == []:
         sql = "INSERT INTO users (name,password, role) VALUES (:username,:password, 'student')"
         db.session.execute(sql, {"username":username,"password":hash_value})
+        breakpoint()
         db.session.commit()
         return redirect("/")
     else:
