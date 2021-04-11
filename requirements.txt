@@ -1,4 +1,4 @@
-2.5.1click==7.1.2
+
 Flask==1.1.2
 
 greenlet==1.0.0
