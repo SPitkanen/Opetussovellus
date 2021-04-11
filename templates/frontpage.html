@@ -18,6 +18,7 @@
 <a href="/logout">Kirjaudu ulos</a>
 <h1>Kurssit</h1><br>
 <a href="/create_course">Luo uusi kurssi</a>
+<hr>
 
 {% for course in courses %}
 <a href="/courses/{{ course[1] }}/{{ course[0] }}">{{ course[1] }}</a>
