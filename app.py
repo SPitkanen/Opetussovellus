@@ -108,7 +108,7 @@ def join(course_id):
     sql = "INSERT INTO participants (course_id, user_id, attend) VALUES (:course_id, :user_id, 1)"
     db.session.execute(sql, {"course_id":course_id, "user_id":user_id})
     db.session.commit()
-    return redirect("/")
+    return redirect("/frontpage")
 
 @app.route("/students/<int:course_id>")
 def students(course_id):
@@ -196,7 +196,7 @@ def add_course():
         sql = "INSERT INTO courses (name, teacher_id, visible) VALUES (:course_name, :teacher_id, 1)"
         db.session.execute(sql, {"course_name":course_name, "teacher_id":teacher_id})
         db.session.commit()
-        return redirect("/")
+        return redirect("/frontpage")
     return render_template("create_course.html")
 
 @app.route("/remove_task/<int:task_id>")
@@ -242,7 +242,7 @@ def delete_course(course_name, course_id):
     sql = "UPDATE courses SET visible=0 WHERE id=:course_id"
     db.session.execute(sql, {"course_id":course_id})
     db.session.commit()
-    return redirect("/")
+    return redirect("/frontpage")
 
 @app.route("/add_task/<int:course_id>")
 def add_task(course_id):
