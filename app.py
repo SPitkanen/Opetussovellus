@@ -74,11 +74,9 @@ def create():
     sql = "SELECT name FROM users WHERE name=:username"
     result = db.session.execute(sql, {"username":username})
     users = result.fetchall()
-    breakpoint()
     if users == []:
         sql = "INSERT INTO users (name,password, role) VALUES (:username,:password, 'student')"
         db.session.execute(sql, {"username":username,"password":hash_value})
-        breakpoint()
         db.session.commit()
         return redirect("/")
     else:
