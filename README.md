@@ -8,6 +8,13 @@ Sovelluksen ominaisuuksia:
 * Opettaja pystyy lisäämään kurssille tekstimateriaalia ja tehtäviä. Tehtävä voi olla ainakin monivalinta tai tekstikenttä, johon tulee kirjoittaa oikea vastaus.
 * Opettaja pystyy näkemään kurssistaan tilaston, keitä opiskelijoita on kurssilla ja mitkä kurssin tehtävät kukin on ratkonut.
 
+
+# Välipalautus 3
+
+Sovelluksen koodi on nyt jaoteltu omiin kansioihin ja ulkoasua paranneltu selkeämmäksi, lisäksi sovellus antaa käyttäjälle ilmoituksen nyt mm. onnistuneista tehtävien ratkaisuista, uuden tunnuksen luomisesta, kurssin luomisesta jne. Tyhjät syötteet tarkistetaan aiempaa paremmin eikä sql kyselyitä ajeta jos käyttäjä ei ole kirjautunut sisälle (tämän voisi varmasti suorittaa fiksumminkin, jostain syystä yksi metodi tähän ei toiminut). Sovelluksen saaminen silmää miellyttäväksi olikin yllättävän haastavaa, tässä riittää vielä hiottavaa.
+
+Heroku toimi testatessa chromella huonosti, safarilla ja omalla koneella hyvin. Perustoimintoihin ei sinänsä ole tehty muutoksia edellisen kerran jälkeen, joten edellisen kerran kuvaus pitää niiden osalta edelleen paikkansa.
+
 # Välipalautus 2   10.4
 
 
