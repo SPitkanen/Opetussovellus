@@ -35,21 +35,19 @@
 <br><br>
 
 <form action="/{{ course_name }}/{{ course_id }}/add_task" method="POST">
+    <p>Luo vapaamuotoinen tehtävä, anna tehtävälle nimi ja halutessasi kuvaus.</p>
+    <p>Nimi:<br>
+    <input type="text" name="name"></p>
 
-<p>Luo vapaamuotoinen tehtävä, anna tehtävälle nimi ja halutessasi kuvaus.</p>
-<p>Nimi:<br>
-<input type="text" name="name"></p>
+    <p>Kuvaus:<br>
+        <textarea name="description" rows="5" cols="40"></textarea><br>
 
-<p>Kuvaus:<br>
-    <textarea name="description" rows="5" cols="40"></textarea><br>
-
-<p>Syötä oikea vastaus tähän. Huomioithan, että vastaajan täytyy syöttää täsmälleen omaa syötettäsi vastaava vastaus.</p>
-<p>Vastaus:<br>
-    <textarea name="choice" rows="5" cols="40"></textarea><br>
-<input type="hidden" name="hide" value="2">
-<input type="submit" name="Submit">
-<input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
-
+    <p>Syötä oikea vastaus tähän. Huomioithan, että vastaajan täytyy syöttää täsmälleen omaa syötettäsi vastaava vastaus.</p>
+    <p>Vastaus:<br>
+        <textarea name="choice" rows="5" cols="40"></textarea><br>
+    <input type="hidden" name="hide" value="2">
+    <input type="submit" name="Submit">
+    <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
 </form>
 
 {% endif %}
