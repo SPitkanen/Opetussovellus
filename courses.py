@@ -71,7 +71,7 @@ def get_tasks(course_id):
 
 def get_solved_count(course_id):
     user_id = session.get("user_id")
-    sql = "SELECT COUNT(DISTINCT s.task_id) FROM solved s, tasks t WHERE t.course_id=:course_id AND s.task_id=t.id AND s.user_id=:user_id"
+    sql = "SELECT COUNT(DISTINCT s.task_id) FROM solved s, tasks t WHERE t.course_id=:course_id AND s.task_id=t.id AND s.user_id=:user_id AND t.visible=1"
     result = db.session.execute(sql, {"course_id":course_id, "user_id":user_id})
     
     solved_count = result.fetchone()[0]
