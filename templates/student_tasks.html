@@ -1,11 +1,14 @@
+{% extends 'base.html' %}
+{% block body %}
 {% if session.role == 'teacher' %}
+
+<a href="/{{ course_name }}/{{ course_id }}/students">Takaisin</a>
 
 <h1>Ratkaistut tehtävät</h1>
 
-{% for task in tasks %}
+{% for task in tasks_list %}
 <p>{{ task[0] }}</p>
 {% endfor %}
 
-<a href="/students/{{ course_id }}">Takaisin</a>
-
 {% endif %}
+{% endblock%}

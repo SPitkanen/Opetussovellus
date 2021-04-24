@@ -1,0 +1,79 @@
+body{
+    margin: auto;
+    max-width: 40em;
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #e9e6bc;
+}
+
+h1{
+    font-size: 40;
+    text-align: center;
+    color: #2c3531;
+}
+
+form{
+    padding: 20px;
+    background-color:#ececec;
+    border-width: 10px;
+    border-color: black;
+    border-radius: 10px;
+    text-align: center;
+}
+
+a{
+    color: rgb(0, 0, 0);
+    text-decoration: none;
+}
+
+a:hover{
+    color:red;
+}
+a:visited{
+    color: black;
+    text-decoration: none;
+}
+
+.course_or_task{
+    text-decoration: none;
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.task_name{
+    float: left;
+}
+
+.remove{
+    float: right;
+}
+
+.message{
+    background-color: yellow;
+    padding: 5px;
+    border-radius: 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.info{
+    background-color: rgb(120, 238, 212);
+    padding: 5px;
+    border-radius: 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.delete{
+    background-color: rgb(212, 6, 6);
+    padding: 5px;
+    border-radius: 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    text-align: center;
+}

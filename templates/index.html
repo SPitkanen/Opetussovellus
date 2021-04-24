@@ -1,15 +1,36 @@
-<h1>Kirjaudu sisään</h1>
-<hr>
+<!DOCTYPE html>
+<link rel="stylesheet" type= "text/css" href="{{ url_for('static', filename='styles/style.css') }}">
 
-<form action="/login" method="POST">
 
-<p>Tunnus:<br>
-<input type="text" name="username"></p>
-<p>Salasana:<br>
-<input type="password" name="password"></p>
-<input type="submit" value="Kirjaudu">
-
-</form>
-
-<hr>
-<a href="/signup">Luo tunnus</a>
+{% with messages = get_flashed_messages %}
+    {% if messages %}
+        {% for message in messages() %}
+            <div class="message">
+                <p>{{ message }}</p>
+            </div>
+        {% endfor %}
+    {% endif %}
+{% endwith %}
+<body>
+    <div class="head1">
+        <h1>Moodle-Lite</h1>
+    </div>
+    
+    <form action="/login" method="POST">
+        <div class="form-text-input">
+            <p>Tunnus:<br>
+            <input type="text" name="username"></p>
+        </div>
+        <div class="form-text-input"></div>
+        <p>Salasana:<br>
+            <input type="password" name="password"></p>
+        </div>
+        <div class="submit">
+            <input type="submit" value="Kirjaudu">
+        </div>
+    </form>
+    
+    <div class="link">
+        <a href="/signup">Luo tunnus</a>
+    </div>
+</body>

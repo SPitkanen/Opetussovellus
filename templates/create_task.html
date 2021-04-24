@@ -1,46 +1,51 @@
+{% extends 'base.html' %}
+{% block body %}
 {% if session.role == 'teacher' %}
 
+<a href="/courses/{{ course_name }}/{{ course_id }}">Takaisin kurssisivulle</a>
 
-<form action="/create_task/{{ course_id }}" method="POST">
+<form action="/{{ course_name }}/{{ course_id }}/add_task" method="POST">
+    <p>Luo monivalinta, anna tehtävälle nimi ja halutessasi tehtävän kuvaus.</p>
+    <p>Nimi:<br>
+    <input type="text" name="name"></p>
 
-<p>Nimi:<br>
-<input type="text" name="name"></p>
+    <p>Kuvaus:<br>
+    <textarea name="description" rows="5" cols="40"></textarea><br>
 
-<p>Kuvaus:<br>
-<input type="message" name="description"></p>
+    <p>Anna neljä vastausvaihtoehtoa, valitse oikeat vastaukset ruudusta.</p>
+    <p>Vastaus 1:
+    <input type="text" name="choice">
+    <input type="checkbox" name="correct" value="0"></p>
 
-<p>Vastaus 1:
-<input type="text" name="choice">
-<input type="checkbox" name="boolean" value="0"></p>
+    <p>Vastaus 2:
+    <input type="text" name="choice">
+    <input type="checkbox" name="correct" value="1"></p>
 
-<p>Vastaus 2:
-<input type="text" name="choice">
-<input type="checkbox" name="boolean" value="1"></p>
+    <p>Vastaus 3:
+    <input type="text" name="choice">
+    <input type="checkbox" name="correct" value="2"></p>
 
-<p>Vastaus 3:
-<input type="text" name="choice">
-<input type="checkbox" name="boolean" value="2"></p>
-
-<p>Vastaus 4:
-<input type="text" name="choice">
-<input type="checkbox" name="boolean" value="3"></p>
-<input type="hidden" name="hide" value="1">
-<input type="submit" name="Submit">
-<input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
-
+    <p>Vastaus 4:
+    <input type="text" name="choice">
+    <input type="checkbox" name="correct" value="3"></p>
+    <input type="hidden" name="hide" value="1">
+    <input type="submit" name="Submit">
+    <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
 </form>
-<hr>
+<br><br>
 
-<form action="/create_task/{{ course_id }}" method="POST">
+<form action="/{{ course_name }}/{{ course_id }}/add_task" method="POST">
 
+<p>Luo vapaamuotoinen tehtävä, anna tehtävälle nimi ja halutessasi kuvaus.</p>
 <p>Nimi:<br>
 <input type="text" name="name"></p>
 
 <p>Kuvaus:<br>
-<input type="message" name="description"></p>
+    <textarea name="description" rows="5" cols="40"></textarea><br>
 
+<p>Syötä oikea vastaus tähän. Huomioithan, että vastaajan täytyy syöttää täsmälleen omaa syötettäsi vastaava vastaus.</p>
 <p>Vastaus:<br>
-<input type="message" name="choice"></p>
+    <textarea name="choice" rows="5" cols="40"></textarea><br>
 <input type="hidden" name="hide" value="2">
 <input type="submit" name="Submit">
 <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
@@ -48,3 +53,4 @@
 </form>
 
 {% endif %}
+{% endblock %}

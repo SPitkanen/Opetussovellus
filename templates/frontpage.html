@@ -1,28 +1,35 @@
-{% if session.role == 'student' %}
-
+{% extends 'base.html' %}
+{% block body %}
 <a href="/logout">Kirjaudu ulos</a>
+{% if session.role == 'student' %}
+<body>
+    <h1>Kurssit</h1><br>
 
-<h1>Kurssit</h1><br>
+    {% for course in courses %}
+    <div class="course_or_task">
+        <a href="/courses/{{ course[1] }}/{{ course[0] }}">{{ course[1] }}</a>
+    </div>
+    {% endfor %}
 
-{% for course in courses %}
-<a href="/courses/{{ course[1] }}/{{ course[0] }}">{{ course[1] }}</a>
-<a href="/join/{{ course[0] }}">Liity kurssille</a>
-<hr>
-{% endfor %}
-
-{% endif %}
-
+    {% endif %}
+</body>
 
 {% if session.role == 'teacher' %}
 
-<a href="/logout">Kirjaudu ulos</a>
-<h1>Kurssit</h1><br>
-<a href="/create_course">Luo uusi kurssi</a>
-<hr>
+<body>
+    <h1>Kurssit</h1><br>
+    <div class="info">
+        <a href="/create_course">Luo uusi kurssi</a>
+    </div>
+    <br>
+    <br>
 
-{% for course in courses %}
-<a href="/courses/{{ course[1] }}/{{ course[0] }}">{{ course[1] }}</a>
-<hr>
-{% endfor %}
+    {% for course in courses %}
+    <div class="course_or_task">
+        <a href="/courses/{{ course[1] }}/{{ course[0] }}">{{ course[1] }}</a><br>
+    </div>
+    {% endfor %}
+</body>
 
 {% endif %}
+{% endblock %}

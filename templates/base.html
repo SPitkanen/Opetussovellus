@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 <link rel="stylesheet" type= "text/css" href="{{ url_for('static', filename='styles/style.css') }}">
 
-
+<html>
+<body>
+{% if session.username %}
 {% with messages = get_flashed_messages %}
     {% if messages %}
         {% for message in messages() %}
@@ -11,19 +13,8 @@
         {% endfor %}
     {% endif %}
 {% endwith %}
-<body>
-    <div class="head1">
-        <h1>Moodle-Lite</h1>
-    </div>
-    
-    <form action="/signup" method="POST">
-    
-    <p>Tunnus:<br>
-    <input type="text" name="username"></p>
-    
-    <p>Salasana:<br>
-    <input type="password" name="password"></p>
-    <input type="submit" value="Luo tunnus">
-    
-    </form>
+{% block body %}
+{% endblock %}
+{% endif %}
 </body>
+</html>

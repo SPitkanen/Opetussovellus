@@ -1,4 +1,8 @@
+{% extends 'base.html' %}
+{% block body %}
 {% if session.role == 'student' %}
+
+<a href="/courses/{{ course_name }}/{{ course_id }}">Takaisin</a>
 
 <h1>{{ task[0] }}</h1>
 <p>{{ task[1] }}</p>
@@ -7,7 +11,7 @@
 {% if task[2] == 1 %}
 
 
-<form action="/answer/{{ task_id }}" method="POST">
+<form action="/{{ course_name }}/{{ course_id }}/tasks/answer/{{ task_id }}" method="POST">
 
 {% for content in contents%}
 <input type="checkbox" name="answer" value="{{ content[0] }}"> {{ content[1] }} <br>
@@ -24,11 +28,7 @@
 
 {% if task[2] == 2 %}
 
-
-<h1>{{ task[0] }}</h1>
-<p>{{ task[1] }}</p>
-
-<form action="/answer/{{ task_id }}" method="POST">
+<form action="/{{ course_name }}/{{ course_id }}/tasks/answer/{{ task_id }}" method="POST">
 <input type="message" name="answer">
 <input type="hidden" name="hide" value="2">
 <input type="submit" name="Submit">
@@ -41,6 +41,8 @@
 
 
 {% if session.role == 'teacher' %}
+
+<a href="/courses/{{ course_name }}/{{ course_id }}">Takaisin</a>
 
 <h1>{{ task[0] }}</h1>
 <p>{{ task[1] }}</p>
@@ -58,11 +60,10 @@
 {% endif %}
 
 {% if task[2] == 2 %}
-<h1>{{ task[0] }}</h1>
-<p>{{ task[1] }}</p>
 <input type="message" name="answer">
 <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
 </form>
 
 {% endif %}
 {% endif %}
+{% endblock %}

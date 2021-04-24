@@ -1,6 +1,9 @@
+{% extends 'base.html' %}
+{% block body %}
 {% if session.role == 'teacher' %}
+<a href="/frontpage">Takaisin etusivulle</a>
 
-<form action="/add_course" method="POST">
+<form action="/create_course" method="POST">
 
 <p>Kurssin nimi:<br>
 <input type="text" name="name"></p>
@@ -10,3 +13,4 @@
 </form>
 
 {% endif %}
+{% endblock %}

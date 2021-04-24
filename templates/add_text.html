@@ -1,13 +1,14 @@
+{% extends 'base.html' %}
+{% block body %}
 {% if session.role == 'teacher' %}
+<a href="/frontpage">Takaisin etusivulle</a>
 
-<form action="/insert_text/{{ course_id }}" method="POST">
-
-<p>Lisää tekstiä:<br>
-<textarea name="content" rows="5" cols="40"></textarea>
-<hr>
-<input type="submit" name="Lisää">
-<input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
-
+<form action="/courses/{{ course_name }}/{{ course_id }}/add_text" method="POST">
+    <p>Lisää tekstiä:<br>
+    <textarea name="content" rows="5" cols="40"></textarea><br>
+    <input type="submit" name="Lisää">
+    <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
 </form>
 
 {% endif %}
+{% endblock %}

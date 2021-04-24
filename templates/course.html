@@ -1,58 +1,73 @@
-{% if session.username %}
-{% if session.role == 'teacher' %}
+{% extends 'base.html' %}
+{% block body %}
+<a href="/frontpage">Takaisin etusivulle</a>
 
+<body>
+    <h1>{{ course_name }}</h1>
+    {% if session.role == 'student' %}
+    {% if on_course == False %}
+        <form action="/join/{{ course_name }}/{{ course_id }}" method="POST">
+            <input type="submit" value="Liity kurssille">
+        </form>
+    {% endif %}
+    
+    {% if on_course == True %}
+        <form action="/exit_course/{{ course_name }}/{{ course_id }}" method="POST">
+            <input type="submit" value="Poistu kurssilta">
+        </form>
+        <br>
+        <hr>
+        <p>Tehtäviä ratkaistu {{ solved_count }}/{{ task_count }}</p>
+    {% endif %}
+    {% endif %}
+    <br>
+    {% if session.role == 'teacher' %}
+    <div class="info">
+        <a href="/{{ course_name }}/{{ course_id }}/students">Kurssin oppilaat</a>
+    </div>
+    {% endif %}
+    <br>
 
-<h1>{{ course_name }}</h1>
-<br>
-<a href="/students/{{ course_id }}">Oppilaat</a>
-<hr>
-<br>
+    {% for task in course_tasks %}
+    <div class="course_or_task">
+        <div class="task_name">
+            <a href="/{{ course_name }}/{{ course_id }}/tasks/{{ task[0] }}">{{ task[1] }}</a>
+        </div>
+        {% if session.role == 'teacher' %}
+        <div class="remove">
+            <a href="/{{ course_name }}/{{ course_id }}/remove_task/{{ task[0] }}">Poista</a>
+        </div>
+        {% endif %}
+    </div>
+    {% endfor %}
 
-{% for task in tasks %}
-<a href="/tasks/{{ task[0] }}">{{ task[1] }}</a>
-<a href="/remove_task/{{ task[0] }}">Poista</a>
-<hr>
-{% endfor %}
+    <br>
+    {% if session.role == 'teacher' %}
+    <div class="info">
+        <a href="/{{ course_name }}/{{ course_id }}/add_task">Lisää tehtävä</a>
+    </div>
+    {% endif %}
 
-<br>
-<a href="/add_task/{{ course_id }}">Lisää tehtävä</a>
-<hr>
+    <br>
+    {% for cont in content %}
+    <div class="content">
+        <p>{{ cont[1] }}</p>
+        {% if session.role == 'teacher' %}
+        <a href="/{{ course_name }}/{{ course_id }}/remove_content/{{ cont[0] }}">Poista</a>
+        {% endif %}
+    </div>
+    {% endfor %}
 
-<br>
-{% for cont in content %}
-<p>{{ cont[1] }}</p>
-<a href="/remove_content/{{ cont[0] }}">Poista</a>
-{% endfor %}
-<hr>
+    <br>
+    {% if session.role == 'teacher' %}
+    <div class="info">
+        <a href="/courses/{{ course_name }}/{{ course_id }}/add_text">Lisää materiaalia</a>
+    </div>
 
-<br>
-<a href="/courses/{{ course_name }}/{{ course_id }}/add_text">Lisää materiaalia</a>
-<hr>
-
-<br>
-<a href="/courses/{{ course_name }}/{{ course_id }}/delete_course">Poista kurssi</a>
-
-{% endif %}
-
-
-{% if session.role == 'student' %}
-
-<h1>{{ course_name }}</h1>
-<br>
-<hr>
-<p>Tehtäviä ratkaistu {{ count }}/{{ task_count }}</p>
-
-{% for task in tasks %}
-<a href="/tasks/{{ task[0] }}">{{ task[1] }}</a>
-<hr>
-{% endfor %}
-<hr>
-
-{% for cont in content %}
-<p>{{ cont[1] }}</p>
-{% endfor %}
-
-<hr>
-{% endif %}
-
-{% endif %}
+    <br>
+    <div class="delete">
+        <a href="/courses/{{ course_name }}/{{ course_id }}/delete_course">Poista kurssi</a>
+    </div>
+    {% endif %}
+</body>
+{% endblock %}
