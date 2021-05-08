@@ -1,6 +1,6 @@
 from db import db
 from flask import session
-import tasks
+import tasks, users
 
 
 def frontpage():
@@ -15,10 +15,7 @@ def frontpage():
         courses = result.fetchall()
         return courses
 
-def new_course(course_name, token):
-    if session["csrf_token"] != token:
-        abort(403)
-    
+def new_course(course_name):
     teacher_id = session["user_id"]
     try:
         sql = "INSERT INTO courses (name, teacher_id, visible) VALUES (:course_name, :teacher_id, 1) RETURNING id"
@@ -61,26 +58,11 @@ def get_contents(course_name, course_id):
     session["course_name"] = course_name
     
     return contents
-   
-def get_tasks(course_id):
-    sql = "SELECT id, name FROM tasks WHERE course_id=:course_id AND visible=1"
-    result = db.session.execute(sql, {"course_id":course_id})
-    tasks = result.fetchall()
-
-    return tasks
-
-def get_solved_count(course_id):
-    user_id = session.get("user_id")
-    sql = "SELECT COUNT(DISTINCT s.task_id) FROM solved s, tasks t WHERE t.course_id=:course_id AND s.task_id=t.id AND s.user_id=:user_id AND t.visible=1"
-    result = db.session.execute(sql, {"course_id":course_id, "user_id":user_id})
-    
-    solved_count = result.fetchone()[0]
-    return solved_count
 
 def join_course(course_name, course_id):
     user_id = session["user_id"]
 
-    if tasks.check_attending(course_id):
+    if users.check_attending(course_id):
         return "Olet jo kurssilla"
     
     # Next query cheks if user has been on the course, but exited.
@@ -123,8 +105,12 @@ def show_students(course_id):
         
     return students
 
-def show_students_tasks(course_id, student_id):
-    sql = "SELECT DISTINCT t.name FROM tasks t, solved s WHERE s.user_id=:student_id AND s.task_id=t.id AND t.course_id=:course_id"
-    result = db.session.execute(sql, {"student_id":student_id, "course_id":course_id})
-    tasks_list = result.fetchall()
-    return tasks_list
+def course_exists(course_id, course_name):
+    sql = "SELECT COALESCE((SELECT id FROM courses WHERE id=:course_id AND name=:course_name AND visible=1), 0)"
+    result = db.session.execute(sql, {"course_id":course_id, "course_name":course_name})
+    cours_id = result.fetchone()[0]
+    if cours_id == 0:
+        return False
+    else:
+        return True
+    

@@ -4,7 +4,6 @@ from flask import session
 from werkzeug.security import check_password_hash, generate_password_hash
 import os
 
-logged_in = False
 # Check if user inputs correspond to a user in database
 def login(username, password):
     sql = "SELECT id, password, role FROM users WHERE name=:username"
@@ -21,16 +20,12 @@ def login(username, password):
             session["role"] = role
             session["user_id"] = user_id
             session["csrf_token"] = os.urandom(16).hex()
-            global logged_in
-            logged_in = True
             return True
         else:
             return False
 
 # Delete sessions
 def logout():
-    global logged_in
-    logged_in = False
     del session["username"]
     del session["role"]
     del session["user_id"]
@@ -47,6 +42,15 @@ def signup(username, password):
     except:
         return False
 
+def check_attending(course_id):
+    user_id = session["user_id"]
+    sql = "SELECT COALESCE((SELECT attend FROM participants WHERE course_id=:course_id AND user_id=:user_id AND attend=1), 0)"
+    result = db.session.execute(sql, {"course_id":course_id, "user_id":user_id})
+    attend = result.fetchone()[0]
+    if attend == 0:
+        return False
+    return True
+
 def user_id():
     return session.get("user_id")
 
@@ -60,5 +64,11 @@ def csrf_token():
     return session.get("csrf_token")
 
 def check_logged():
-    global logged_in
-    return logged_in
+    try:
+        usr_id = session.get("user_id")
+        if usr_id > 0:
+            return True
+        else:
+            return False
+    except:
+        return False

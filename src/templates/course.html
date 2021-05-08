@@ -16,8 +16,6 @@
             <input type="submit" value="Poistu kurssilta">
         </form>
         <br>
-        <hr>
-        <p>Tehtäviä ratkaistu {{ solved_count }}/{{ task_count }}</p>
     {% endif %}
     {% endif %}
     <br>
@@ -28,17 +26,41 @@
     {% endif %}
     <br>
 
+    <h2>Tehtävät</h2>
+    {% if on_course == True %}
+        <p>Tehtäviä ratkaistu {{ solved_count }}/{{ task_count }}</p>
+    {% elif session.role == 'student' %}
+        <p>Liity kurssille nähdäksesi tehtävät</p>
+    {% endif %}
     {% for task in course_tasks %}
-    <div class="course_or_task">
-        <div class="task_name">
-            <a href="/{{ course_name }}/{{ course_id }}/tasks/{{ task[0] }}">{{ task[1] }}</a>
-        </div>
         {% if session.role == 'teacher' %}
-        <div class="remove">
-            <a href="/{{ course_name }}/{{ course_id }}/remove_task/{{ task[0] }}">Poista</a>
+        <div class="course_or_task">
+            <div class="task_name">
+                <a href="/{{ course_name }}/{{ course_id }}/tasks/{{ task[0] }}">{{ task[1] }}</a>
+            </div>
+            <div class="remove">
+                <a href="/{{ course_name }}/{{ course_id }}/remove_task/{{ task[0] }}">Poista</a>
+            </div>
         </div>
         {% endif %}
-    </div>
+        {% if session.role == 'student' %}
+            {% if on_course == True %}
+                {% if task[2] == 1 %}
+                    <div class="course_or_task2">
+                        <div class="task_name">
+                            <a href="/{{ course_name }}/{{ course_id }}/tasks/{{ task[0] }}">{{ task[1] }}</a>
+                        </div>
+                    </div>
+                {% endif %}
+                {% if task[2] == 0 %}
+                    <div class="course_or_task">
+                        <div class="task_name">
+                            <a href="/{{ course_name }}/{{ course_id }}/tasks/{{ task[0] }}">{{ task[1] }}</a>
+                        </div>
+                    </div>
+                {% endif %}
+            {% endif %}
+        {% endif %}
     {% endfor %}
 
     <br>
@@ -49,6 +71,7 @@
     {% endif %}
 
     <br>
+    <h2>Kurssin materiaali</h2>
     {% for cont in content %}
     <div class="content">
         <p>{{ cont[1] }}</p>
