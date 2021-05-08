@@ -8,6 +8,14 @@ Sovelluksen ominaisuuksia:
 * Opettaja pystyy lisäämään kurssille tekstimateriaalia ja tehtäviä. Tehtävä voi olla ainakin monivalinta tai tekstikenttä, johon tulee kirjoittaa oikea vastaus.
 * Opettaja pystyy näkemään kurssistaan tilaston, keitä opiskelijoita on kurssilla ja mitkä kurssin tehtävät kukin on ratkonut.
 
+# Viimeinen palautus
+
+Viimeiseen palautukseen korjattu seuraavat:
+
+* Käyttäjän oikeuksien tarkistus backendin puolella
+* Ratkaistujen tehtävien näyttäminen käyttäjälle värikoodattuna
+* Pieniä parannuksia toimintoihin
+* Repositoriota siistitty hieman
 
 # Välipalautus 3
 
