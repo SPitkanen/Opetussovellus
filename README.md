@@ -10,12 +10,18 @@ Sovelluksen ominaisuuksia:
 
 # Viimeinen palautus
 
+[Heroku](http://moodle-lite.herokuapp.com/)
+
+Sovellusta voi testata seuraavilla tunnuksilla:
+
+Opettajan tunnukset: Tunnus: Opettaja Salasana: opettaja
+Oppilaan tunnukset: Tunnus: oppilas1 Salasana: oppilas1
+
 Viimeiseen palautukseen korjattu seuraavat:
 
 * Käyttäjän oikeuksien tarkistus backendin puolella
 * Ratkaistujen tehtävien näyttäminen käyttäjälle värikoodattuna
 * Pieniä parannuksia toimintoihin
-* Repositoriota siistitty hieman
 
 # Välipalautus 3
 
