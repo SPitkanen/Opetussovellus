@@ -43,13 +43,16 @@ def signup(username, password):
         return False
 
 def check_attending(course_id):
-    user_id = session["user_id"]
-    sql = "SELECT COALESCE((SELECT attend FROM participants WHERE course_id=:course_id AND user_id=:user_id AND attend=1), 0)"
-    result = db.session.execute(sql, {"course_id":course_id, "user_id":user_id})
-    attend = result.fetchone()[0]
-    if attend == 0:
+    try:
+        user_id = session["user_id"]
+        sql = "SELECT COALESCE((SELECT attend FROM participants WHERE course_id=:course_id AND user_id=:user_id AND attend=1), 0)"
+        result = db.session.execute(sql, {"course_id":course_id, "user_id":user_id})
+        attend = result.fetchone()[0]
+        if attend == 0:
+            return False
+        return True
+    except:
         return False
-    return True
 
 def user_id():
     return session.get("user_id")

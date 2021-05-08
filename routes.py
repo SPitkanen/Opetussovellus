@@ -150,6 +150,9 @@ def student_tasks(course_name, course_id, student_id):
 def show_task(course_name, course_id, task_id):
     if users.check_logged() == False:
         return redirect("/")
+    if users.role() == 'student' and users.check_attending(course_id) == False:
+        flash("Liity kurssille nähdäksesi tehtävät")
+        return redirect("/courses/" + course_name + "/" + str(course_id))
     if courses.course_exists(course_id, course_name):
         task = tasks.get_task(task_id)
         contents = tasks.get_task_choices(task_id)
